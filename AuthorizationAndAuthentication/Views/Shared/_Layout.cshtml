@@ -1,0 +1,43 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_Layout</title>
+</head>
+<body>
+    <header>
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-controller="AboutUs" asp-action="Index">About Us</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Students" asp-action="Index">Students</a>
+        }
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Account" asp-action="Login">Sign in</a> 
+            <a asp-controller="Account" asp-action="Register">Register</a>
+        
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Logout">Sign out</a><br />
+        }
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <h1>
+                Welcome Mr. @User.Identity.Name
+            </h1>
+        }
+    </header>
+    <section>@RenderBody()</section>
+    <footer>westlabels.com</footer>
+</body>
+</html>
